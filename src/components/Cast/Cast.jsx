@@ -22,8 +22,9 @@ const Cast = () => {
 
     
   return (
+    <>
+      {cast.length !== 0 ? cast.map(({name, character, profile_path, cast_id}) => 
     <ActorContainer>
-    {cast.map(({name, character, profile_path, cast_id}) => 
         <li className="li" key={cast_id}>
             <div>
                 <img src={profile_path !== null ? `https://image.tmdb.org/t/p/w200/${profile_path}` : img} alt={name}></img>
@@ -36,9 +37,10 @@ const Cast = () => {
                 </div>
             </div>
         </li>
-
-    )}
     </ActorContainer>
+
+    ) : <div>There is no info about actors available</div> }
+    </>
   )
 }
 
