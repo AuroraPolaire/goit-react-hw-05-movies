@@ -8,10 +8,11 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <GlobalStyles />
-    <BrowserRouter basename='/goit-react-hw-05-movies/'>
+    <BrowserRouter >
       <App />
     </BrowserRouter>
   </React.StrictMode>
 );
 
 
+// basename='/goit-react-hw-05-movies/
