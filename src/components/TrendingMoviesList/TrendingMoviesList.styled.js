@@ -13,7 +13,7 @@ export const StyledLink = styled(NavLink)`
     &:visited{ color: darkgray;}
 
     &:hover{
-        color: pink;
+        color: #0d6efd;
     }
 
 `
