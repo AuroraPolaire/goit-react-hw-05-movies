@@ -2,7 +2,7 @@ import { useParams, useLocation, Link, Outlet } from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 import {getMovieByID} from '../servises/movieAPI';
 import { StyledButton, StyledContainer, StyledAdditional, StyledLink } from "./MovieCard.styled";
-import img from '../../images/no-image-icon.png';
+// import img from '../../images/no-image-icon.png';
 
 
 
