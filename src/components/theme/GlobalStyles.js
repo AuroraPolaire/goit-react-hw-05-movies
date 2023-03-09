@@ -72,6 +72,13 @@ main {
   background-color: #f8f8f4;
 }
 
+.refDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -200px 0 0 -150px;
+}
+
 `;
 
 export default GlobalStyles;

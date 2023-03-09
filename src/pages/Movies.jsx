@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {getMovieQuery} from '../components/servises/movieAPI';
 import QueryMovieList from '../components/QueryMovieList/QueryMovieList';
 import { StyledForm } from './Movies.styled';
@@ -13,6 +13,7 @@ const Movies = () => {
   const [moviesList, setMoviesList] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
+  const refDiv = useRef('');
 
 
   
@@ -23,7 +24,7 @@ const Movies = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const query = event.target.elements.input.value.trim()
-    console.log(query);
+    
     if(query === '') {
       toast.error('The input is empty!');
       return;
@@ -39,6 +40,10 @@ const Movies = () => {
     }
     const fetchMovies = async () => {
       const movies = await getMovieQuery(query, page);
+      if (movies.results.length === 0) {
+        refDiv.current.textContent = 'There are no movies found';
+        return;
+    }
       setMoviesList(movies.results)
       setPageCount(movies.total_pages);
     }
@@ -61,8 +66,9 @@ const Movies = () => {
         <button type='submit'>Submit</button>
     </form>
     </StyledForm>
+    {moviesList.length === 0 ? <div className='refDiv' ref={refDiv}></div> : null}
     <main>
-    {moviesList.length !== 0 ? <QueryMovieList movies={moviesList}/> : <div>No movies found</div>}
+    {moviesList.length !== 0 ? <QueryMovieList movies={moviesList}/> : null}
     </main>
     {moviesList.length !== 0 ? <ReactPaginate
         nextLabel="next >"

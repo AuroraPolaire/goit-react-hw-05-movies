@@ -10,12 +10,15 @@ const QueryMovieList = ({movies}) => {
     const location = useLocation();
 
     return (
+        
         <div className='column-container'>
         <List>
         {movies.map((movie) => 
-        <li key={movie.id} className="item-container">
-            <StyledLink to={`/movies/${movie.id}`} state={{ from: location }}>{movie.original_title}</StyledLink>
+        <StyledLink to={`/movies/${movie.id}`} key={movie.id} state={{ from: location }}>
+        <li  className="item-container">
+            {movie.original_title}
         </li>
+        </StyledLink>
         )}
         </List>
         </div>

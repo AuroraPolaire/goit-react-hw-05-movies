@@ -12,6 +12,7 @@ const MovieCard = () => {
     const { id } = useParams();
     const location = useLocation();
     const backLink = location?.state?.from ?? "/";
+   
 
   
     useEffect(()=> {
