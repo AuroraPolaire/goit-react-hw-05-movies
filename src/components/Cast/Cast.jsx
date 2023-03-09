@@ -1,29 +1,41 @@
 import { useParams } from "react-router-dom";
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {getMovieCredits} from '../servises/movieAPI';
 import { ActorContainer } from "./Cast.styled";
 import img from '../../images/no-image-placeholder.png';
+import { ThreeDots } from 'react-loader-spinner';
 
 
 const Cast = () => {
     const [cast, setCast]= useState([]);
     const { id } = useParams();
+    const [loading, setLoading] = useState(false);
+    const refDiv = useRef('');
 
 
     useEffect(()=> {
-        const fetchCast = async (id) => {
-            const result = await getMovieCredits(id);
-            setCast(result);
-
-        }
-        fetchCast(id);
+        setLoading(true);
+        try {
+            const fetchCast = async (id) => {
+                const result = await getMovieCredits(id);
+                setCast(result);
+                if (result.length === 0) {
+                    refDiv.current.textContent = 'There is no info about actors available';
+                    return;
+                }
+                }
+            fetchCast(id);
+        } catch (error) {
+            console.log(error);
+        } finally {setLoading(false)}
+       
     }, [id])
 
 
     
   return (
     <ActorContainer>
-    {cast.length !== 0 ? cast.map(({name, character, profile_path, cast_id}) => 
+    {loading === false ? cast.map(({name, character, profile_path, cast_id}) => 
         <li className="li" key={cast_id}>
             <div>
                 <img src={profile_path !== null ? `https://image.tmdb.org/t/p/w200/${profile_path}` : img} alt={name}></img>
@@ -37,7 +49,17 @@ const Cast = () => {
             </div>
         </li>
 
-    ) : <div>There is no info about actors available</div> }
+    ) : <ThreeDots
+    height="80"
+    width="80"
+    radius="9"
+    color="blue"
+    ariaLabel="three-dots-loading"
+    wrapperStyle={{}}
+    wrapperClass="loader"
+    visible={true}
+  /> }
+    {cast.length === 0 ? <div ref={refDiv}></div> : null}
     </ActorContainer>
   )
 }

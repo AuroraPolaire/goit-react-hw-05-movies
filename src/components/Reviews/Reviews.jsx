@@ -1,27 +1,42 @@
 import { useParams } from "react-router-dom";
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {getMovieReviews} from '../servises/movieAPI';
 import img from '../../images/no-image-icon.png';
-import {ReviewsContainer} from './Reviews.styled'
+import {ReviewsContainer} from './Reviews.styled';
+import { ThreeDots } from 'react-loader-spinner';
 
 
 const Reviews = () => {
-    const [reviews, setReviews]= useState([]);
     const { id } = useParams();
+    const [reviews, setReviews]= useState([]);
+    const [loading, setLoading] = useState(false);
+    const refDiv = useRef('');
 
     useEffect(()=> {
-        const fetchReviews = async (id) => {
-            const result = await getMovieReviews(id);
-            setReviews(result.results);
+        setLoading(true);
+        try {
+            const fetchReviews = async (id) => {
+                const result = await getMovieReviews(id);
+                setReviews(result.results);
 
-        }
-        fetchReviews(id);
+                if (result.results.length === 0) {
+                    refDiv.current.textContent = 'There are no reviews available';
+                    return;
+                }
+            }  
+            fetchReviews(id);
+        } catch (error) {
+            console.log(error);
+        } finally {setLoading(false)}
+        
+        
     }, [id]);
 
 
    return (
     <>
-    {reviews.length !== 0 ? reviews.map(({author, content, author_details : {avatar_path}}) => 
+    
+    {loading === false ? reviews.map(({author, content, author_details : {avatar_path}}) => 
         <ReviewsContainer key={author}>
         <div className="name">
             <h3>{author}</h3>
@@ -30,7 +45,17 @@ const Reviews = () => {
            
         <div className="content"><p>{content}</p></div>
         </ReviewsContainer>
-    ): <div>There are no reviews available</div>}
+    ): <ThreeDots
+    height="80"
+    width="80"
+    radius="9"
+    color="blue"
+    ariaLabel="three-dots-loading"
+    wrapperStyle={{}}
+    wrapperClass="loader"
+    visible={true}
+  /> }
+  {reviews.length === 0 ? <div ref={refDiv}></div> : null}
     </>)
 }
 
