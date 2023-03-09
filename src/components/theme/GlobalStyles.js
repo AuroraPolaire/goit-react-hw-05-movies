@@ -53,6 +53,25 @@ main {
   justify-content: center;
   padding-top: 20px;
 }
+
+.column-container {
+  column-count: 2;
+  column-fill: auto;
+  margin-bottom: 20px;
+}
+
+.item-container {
+  /* margin-top: 10px ; */
+  margin-bottom: 10px;
+  padding: 15px 10px;
+  background-color: #eeeee4;
+  border-radius: 5px;
+}
+
+.item-container:hover {
+  background-color: #f8f8f4;
+}
+
 `;
 
 export default GlobalStyles;

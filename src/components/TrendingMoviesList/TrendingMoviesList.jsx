@@ -8,13 +8,17 @@ const TrendingMoviesList = ({movies}) => {
  
     const location = useLocation();
   return (
+    <div className='column-container'>
     <List>
     {movies.map((movie) => 
-    <li key={movie.id}>
-        <StyledLink to={`/movies/${movie.id}`} state={{ from: location }}>{movie.original_title}</StyledLink>
+    <StyledLink to={`/movies/${movie.id}`} state={{ from: location }}>
+    <li key={movie.id} className="item-container">
+        {movie.original_title}
     </li>
+    </StyledLink>
   )}
     </List>
+    </div>
   )
 }
 
