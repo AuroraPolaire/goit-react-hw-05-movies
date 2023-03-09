@@ -1,12 +1,18 @@
 import React from 'react';
 import { StyledForm } from './Form';
-import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
+// import { useSearchParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import PropTypes from 'prop-types';
 
 const Form = ({ onSubmit }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const name = searchParams.get('name') ?? '';
+  const [input, setInput] = useState('');
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const name = searchParams.get('name') ?? '';
+
+  const handleChange = event => {
+    setInput(event.target.value.trim());
+  };
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -16,7 +22,7 @@ const Form = ({ onSubmit }) => {
       toast.error('The input is empty!');
       return;
     }
-    onSubmit(event.target.input.value);
+    onSubmit(query);
   };
   return (
     <div>
@@ -27,8 +33,8 @@ const Form = ({ onSubmit }) => {
               type="text"
               placeholder="Enter a movie"
               name="input"
-              value={name}
-              onChange={e => setSearchParams({ name: e.target.value.trim() })}
+              value={input}
+              onChange={handleChange}
             />
           </label>
           <button type="submit">Submit</button>

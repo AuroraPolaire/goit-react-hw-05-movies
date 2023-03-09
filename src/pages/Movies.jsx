@@ -5,24 +5,27 @@ import MovieList from '../components/MovieList/MovieList';
 import { Toaster } from 'react-hot-toast';
 import ReactPaginate from 'react-paginate';
 import Form from '../components/Form/Form.jsx';
+import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
-  const [query, setQuery] = useState('');
   const [moviesList, setMoviesList] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   const refDiv = useRef('');
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const name = searchParams.get('name') ?? '';
+
   const getQuery = query => {
-    setQuery(query);
+    setSearchParams({ name: query });
   };
 
   useEffect(() => {
-    if (query === '') {
+    if (name === '') {
       return;
     }
     const fetchMovies = async () => {
-      const movies = await getMovieQuery(query, page);
+      const movies = await getMovieQuery(name, page);
       if (movies.results.length === 0) {
         refDiv.current.textContent = 'There are no movies found';
         return;
@@ -30,8 +33,8 @@ const Movies = () => {
       setMoviesList(movies.results);
       setPageCount(movies.total_pages);
     };
-    fetchMovies(query);
-  }, [query, page]);
+    fetchMovies(name);
+  }, [name, page]);
 
   const handlePageClick = event => {
     const page = event.selected + 1;
