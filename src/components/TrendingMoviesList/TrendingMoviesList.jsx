@@ -11,7 +11,7 @@ const TrendingMoviesList = ({movies}) => {
     <div className='column-container'>
     <List>
     {movies.map((movie) => 
-    <StyledLink to={`/movies/${movie.id}`} state={{ from: location }}>
+    <StyledLink to={`/movies/${movie.id}`} key={movie.id} state={{ from: location }}>
     <li key={movie.id} className="item-container">
         {movie.original_title}
     </li>

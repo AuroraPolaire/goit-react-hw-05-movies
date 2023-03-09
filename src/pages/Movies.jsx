@@ -22,7 +22,8 @@ const Movies = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const query = event.target.input.value.trim()
+    const query = event.target.elements.input.value.trim()
+    console.log(query);
     if(query === '') {
       toast.error('The input is empty!');
       return;

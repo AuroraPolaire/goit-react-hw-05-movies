@@ -2,7 +2,6 @@ import { useParams, useLocation, Link, Outlet } from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 import {getMovieByID} from '../servises/movieAPI';
 import { StyledButton, StyledContainer, StyledAdditional, StyledLink } from "./MovieCard.styled";
-// import img from '../../images/no-image-icon.png';
 
 
 
@@ -12,7 +11,7 @@ const MovieCard = () => {
     const [poster, setPoster] = useState('')
     const { id } = useParams();
     const location = useLocation();
-    const backLink = location.state?.from ?? "/";
+    const backLink = location?.state?.from ?? "/";
 
   
     useEffect(()=> {
@@ -51,8 +50,8 @@ const MovieCard = () => {
     <StyledAdditional>
         <h2>Additional information</h2>
         <ul >
-            <li className="additional"><StyledLink to="cast">Cast</StyledLink></li>
-            <li className="additional"><StyledLink to="reviews">Reviews</StyledLink></li>
+            <li className="additional"><StyledLink to="cast" state={{ from: location }}>Cast</StyledLink></li>
+            <li className="additional"><StyledLink to="reviews" state={{ from: location }}>Reviews</StyledLink></li>
         </ul>
     </StyledAdditional>
     <Outlet />
