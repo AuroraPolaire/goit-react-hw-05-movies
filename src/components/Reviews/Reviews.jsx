@@ -10,7 +10,12 @@ const Reviews = () => {
     const { id } = useParams();
     const [reviews, setReviews]= useState([]);
     const [loading, setLoading] = useState(false);
+    const [isReadMore, setIsReadMore] = useState(true);
     const refDiv = useRef('');
+
+    const toggleReadMore = () => {
+        setIsReadMore(!isReadMore);
+      };
 
     useEffect(()=> {
         setLoading(true);
@@ -37,14 +42,20 @@ const Reviews = () => {
     <>
     
     {loading === false ? reviews.map(({author, content, author_details : {avatar_path}}) => 
+    
         <ReviewsContainer key={author}>
         <div className="name">
             <h3>{author}</h3>
             <img src={avatar_path !== null ? (!avatar_path.includes('http') ? `https://image.tmdb.org/t/p/w500/${avatar_path}` : avatar_path.slice(1, avatar_path.length )) : img } alt={author} ></img>
         </div>
-           
-        <div className="content"><p>{content}</p></div>
-        </ReviewsContainer>
+        <div>
+        {isReadMore ? content.slice(0, 400)  : content}
+      <span onClick={toggleReadMore} className="read-or-hide">
+        {isReadMore ? ".....read more" : "Show less"}
+      </span>
+      </div>
+     </ReviewsContainer>
+   
     ): <ThreeDots
     height="80"
     width="80"

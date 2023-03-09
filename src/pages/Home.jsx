@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {movieAPI} from '../components/servises/movieAPI';
-import TrendingMoviesList from 'components/TrendingMoviesList/TrendingMoviesList';
+import MovieList from 'components/MovieList/MovieList';
 import ReactPaginate from 'react-paginate';
 
 
@@ -37,7 +37,7 @@ const handlePageClick = (event) => {
   return (
     <>
     <main>
-    <TrendingMoviesList movies={movies}/>
+    <MovieList movies={movies}/>
     </main>
     <ReactPaginate
         nextLabel="next >"

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ReviewsContainer = styled.div`
+
  display: flex;
  align-items: center;
  gap: 10px;
@@ -24,6 +25,12 @@ export const ReviewsContainer = styled.div`
     border-radius: 50%;
     display: block;
     margin: 0 auto;
+}
+
+& .read-or-hide{
+
+  color: rgb(192,192,192);
+  cursor: pointer;
 }
 
 `
