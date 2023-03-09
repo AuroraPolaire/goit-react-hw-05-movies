@@ -40,7 +40,7 @@ const MovieCard = () => {
         </div>
         <div>
             <h1>{movie.original_title} ({parseFloat(movie.release_date)})</h1>
-            <p>User score: {movie.vote_average * 10}&#37;</p>
+            <p>User score: {(movie.vote_average * 10).toFixed()}&#37;</p>
             <h2>Overview</h2>
             <p>{movie.overview}</p>
             <h2>Genres</h2>
