@@ -11,7 +11,7 @@ const TrendingMoviesList = ({movies}) => {
     <List>
     {movies.map((movie) => 
     <li key={movie.id}>
-        <StyledLink to={`/trending_movies/${movie.id}`} state={{ from: location }}>{movie.original_title}</StyledLink>
+        <StyledLink to={`/movies/${movie.id}`} state={{ from: location }}>{movie.original_title}</StyledLink>
     </li>
   )}
     </List>

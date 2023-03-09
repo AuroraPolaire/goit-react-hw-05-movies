@@ -8,22 +8,23 @@ import { ThreeDots } from 'react-loader-spinner';
 const SharedLayout = () => {
   return (
     <div>
+      <Suspense fallback={<ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="blue"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass="loader"
+            visible={true}
+          />}>
         <header>
             <NavigationBar>
                 <StyledLink to='/'> Home</StyledLink>
                 <StyledLink to='/movies'> Movies</StyledLink>
             </NavigationBar>
         </header>
-        <Suspense fallback={<ThreeDots
-            height="80"
-            width="80"
-            radius="9"
-            color="#0d6efd"
-            ariaLabel="three-dots-loading"
-            wrapperStyle={{}}
-            wrapperClass="loader"
-            visible={true}
-          />}>
+        
         <Outlet />
       </Suspense>
     </div>

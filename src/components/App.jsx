@@ -8,7 +8,7 @@ const NotFound = lazy(() => import("pages/NotFound"));
 const MovieCard = lazy(() => import("../components/MovieCard/MovieCard"));
 const Cast = lazy(() => import("./Cast/Cast"));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
-const TrendingMoviesList = lazy(() => import("./TrendingMoviesList/TrendingMoviesList"));
+// const TrendingMoviesList = lazy(() => import("./TrendingMoviesList/TrendingMoviesList"));
 
 
 
