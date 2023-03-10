@@ -63,12 +63,12 @@ const MovieCard = () => {
         <h2>Additional information</h2>
         <ul>
           <li className="additional">
-            <StyledLink to="cast" state={{ from: location }}>
+            <StyledLink to="cast" state={{ from: location?.state?.from }}>
               Cast
             </StyledLink>
           </li>
           <li className="additional">
-            <StyledLink to="reviews" state={{ from: location }}>
+            <StyledLink to="reviews" state={{ from: location?.state?.from }}>
               Reviews
             </StyledLink>
           </li>
