@@ -4,7 +4,7 @@ import { getMovieReviews } from '../servises/movieAPI';
 import img from '../../images/no-image-icon.png';
 import { ReviewsContainer } from './Reviews.styled';
 import { ThreeDots } from 'react-loader-spinner';
-import ReadMoreReact from 'read-more-react';
+import ClampLines from 'react-clamp-lines';
 
 const Reviews = () => {
   const { id } = useParams();
@@ -51,13 +51,19 @@ const Reviews = () => {
                 alt={author}
               ></img>
             </div>
-            <ReadMoreReact
-              text={content}
-              min={0}
-              ideal={1000}
-              max={content.length}
-              readMoreText=" ... Read more"
-            />
+            {content.length !== 0 ? (
+              <ClampLines
+                text={content}
+                buttons={true}
+                id={author}
+                lines={2}
+                ellipsis="..."
+                moreText="Read more"
+                lessText="Hide"
+                className=""
+                innerElement="p"
+              />
+            ) : null}
           </ReviewsContainer>
         ))
       ) : (

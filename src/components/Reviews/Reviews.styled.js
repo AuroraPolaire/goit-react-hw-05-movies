@@ -9,7 +9,6 @@ export const ReviewsContainer = styled.div`
 
   & .name {
     text-align: center;
-    flex-grow: 1;
     min-width: 200px;
   }
 
@@ -30,9 +29,10 @@ export const ReviewsContainer = styled.div`
     cursor: pointer;
   }
 
-  .read-more-button {
+  .clamp-lines__button {
+    text-align: right;
     display: inline-block;
     cursor: pointer;
-    font-weight: bold;
+    border: 0;
   }
 `;
